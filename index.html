@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room: La Mansión Olvidada</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="start-screen">
+        <h1>La Mansión Olvidada</h1>
+        <p>Te despiertas en un lugar desconocido. La puerta está cerrada. Debes encontrar la salida... antes de que sea demasiado tarde.</p>
+        <button id="start-button">Empezar Juego</button>
+        <p><small>Advertencia: Este juego contiene sustos y música de ambiente que puede resultar inquietante.</small></p>
+    </div>
+
+    <div id="game-container" style="display: none;">
+        <div id="room">
+            <img id="room-image" src="" alt="Sala actual">
+            <!-- Áreas interactivas (se añadirán con JS) -->
+        </div>
+
+        <div id="ui-container">
+            <div id="message-area">
+                <p id="room-message"></p>
+                <p id="action-message"></p>
+            </div>
+            <div id="inventory-area">
+                <h3>Inventario</h3>
+                <ul id="inventory-list">
+                    <!-- Items aparecerán aquí -->
+                </ul>
+            </div>
+             <div id="audio-controls">
+                <button id="mute-button">🔇 Mute</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elemento para sustos (imagen superpuesta) -->
+    <div id="jumpscare" class="jumpscare-hidden">
+        <img id="jumpscare-image" src="" alt="Susto">
+    </div>
+
+    <!-- Elementos de Audio -->
+    <audio id="bgm-suspense" loop src="audio/suspense_music.mp3"></audio>
+    <audio id="bgm-creepy" loop src="audio/creepy_ambience.mp3"></audio>
+    <audio id="sfx-jumpscare1" src="audio/jumpscare1.wav"></audio>
+    <audio id="sfx-door-creak" src="audio/door_creak.wav"></audio>
+    <audio id="sfx-item-pickup" src="audio/item_pickup.wav"></audio>
+    <audio id="sfx-unlock" src="audio/unlock.wav"></audio>
+     <audio id="sfx-locked" src="audio/locked_door.wav"></audio>
+     <audio id="sfx-whisper" src="audio/whisper.wav"></audio>
+     <audio id="sfx-bang" src="audio/bang.wav"></audio>
+     <!-- Añade más audios según necesites -->
+
+
+    <script src="script.js"></script>
+</body>
+</html>
