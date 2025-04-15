@@ -34,7 +34,7 @@ let currentBGM = null;
 const rooms = {
     // --- SALA 1: EL SÓTANO ---
     sotano: {
-        image: 'images/room1.jpg',
+        image: 'images/room1.jpeg',
         message: 'Estás en un sótano húmedo y oscuro. Huele a tierra mojada y... a algo más. Hay una puerta de madera al fondo.',
         backgroundMusic: bgmCreepy,
         objects: [
@@ -86,7 +86,7 @@ const rooms = {
     },
     // --- SALA 2: EL PASILLO ---
     pasillo: {
-        image: 'images/room2.jpg',
+        image: 'images/room2.jpeg',
         message: 'Un pasillo largo y decrépito. Hay varias puertas y un viejo cuadro en la pared. El aire es pesado.',
         backgroundMusic: bgmSuspense,
         objects: [
@@ -146,7 +146,7 @@ const rooms = {
     },
     // --- SALA 3: LA BIBLIOTECA ---
     biblioteca: {
-        image: 'images/room3.jpg',
+        image: 'images/room3.jpeg',
         message: 'Una biblioteca llena de libros polvorientos. El silencio es casi total, roto solo por el crujir de la madera vieja.',
         backgroundMusic: bgmCreepy, // Podría tener su propia música más tranquila/inquietante
         objects: [
@@ -186,7 +186,7 @@ const rooms = {
     },
     // --- SALA 4: EL DORMITORIO --- (Necesitaríamos una forma de llegar, quizás desde la biblioteca o pasillo si se desbloquea)
     dormitorio: {
-        image: 'images/room4.jpg',
+        image: 'images/room4.jpeg',
         message: 'Un dormitorio inquietante. Una vieja cama con dosel y una mecedora que se mueve sola lentamente...',
         backgroundMusic: bgmSuspense, // Música de cuna distorsionada?
         objects: [
@@ -242,7 +242,7 @@ const rooms = {
     },
     // --- SALA 5: VESTÍBULO FINAL --- (Acceso desde Pasillo, necesita llave/objeto especial?)
     vestibulo: {
-        image: 'images/room5.jpg',
+        image: 'images/room5.jpeg',
         message: 'El vestíbulo principal. La gran puerta de salida está frente a ti, pero tiene una cerradura compleja.',
         backgroundMusic: bgmSuspense, // Música más intensa
         objects: [
