@@ -127,12 +127,44 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '60%', left: '80%', width: '2%', height: '5%' },
+
+            // --- Objeto 'puerta_dormitorio' DENTRO de la sala 'pasillo' ---
+            {
+                id: 'puerta_dormitorio',
+                name: 'Puerta al Dormitorio',
+                coords: { top: '25%', left: '80%', width: '15%', height: '50%' }, // ¡Asegúrate que las coords sean correctas para tu imagen!
                 action: (state) => {
-                     setMessage('Esta puerta parece atascada o bloqueada desde el otro lado.');
-                     playSound(sfxLocked);
+                    // ***** INICIO DE LA MODIFICACIÓN *****
+                    // Comprobamos la flag de la OTRA sala (dormitorio) para saber si ya se 'desbloqueó' formalmente desde dentro.
+                    if (rooms.dormitorio.flags.dormitorio_puerta_abierta) {
+                        // Si ya se usó la palanca desde dentro, la puerta se abre normalmente.
+                        setMessage("La puerta al dormitorio se abre sin problemas.");
+                        playSound(sfxDoorCreak);
+                        changeRoom('dormitorio');
+                    } else {
+                        // *** NUEVA LÓGICA ***
+                        // Si la puerta NO ha sido desbloqueada formalmente desde dentro,
+                        // permitimos la entrada la PRIMERA VEZ, pero con un mensaje diferente.
+                        // La narrativa es que logras forzarla o que estaba solo ligeramente atrancada.
+                        setMessage("La puerta parece atascada, pero consigues abrirla con un empujón. Chirría ominosamente al moverse.");
+                        playSound(sfxLocked); // Quizás un sonido inicial de forcejeo
+                        setTimeout(() => { // Un pequeño retraso antes del chirrido de apertura
+                           playSound(sfxDoorCreak);
+                           changeRoom('dormitorio'); // ¡Permitimos el paso al dormitorio!
+                        }, 300); // 300ms de retraso
+
+                        // NO cambiamos la flag aquí. La flag 'dormitorio_puerta_abierta'
+                        // SOLO se pondrá a true cuando uses la palanca desde DENTRO del dormitorio.
+                        // Esto mantiene la lógica interna consistente si quieres que el jugador
+                        // sienta que realmente 'arregló' la puerta desde el otro lado.
+                    }
+                    // ***** FIN DE LA MODIFICACIÓN *****
                 }
-             },
+            },
+            // ... resto de objetos del pasillo ...
+
+
+            
              { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '62%', left: '16%', width: '2%', height: '6%' }, // Asumiendo que está a la izquierda
                 action: (state) => {
                     playSound(sfxDoorCreak);
