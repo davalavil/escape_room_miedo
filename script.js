@@ -115,13 +115,13 @@ const rooms = {
                     }
                 }
             },
-            { id: 'cuadro_antiguo', name: 'Cuadro antiguo', coords: { top: '42%', left: '25%', width: '1%', height: '5%' },
+            { id: 'cuadro_antiguo', name: 'Cuadro antiguo', coords: { top: '42%', left: '26%', width: '1%', height: '5%' },
                 action: (state) => {
                      setMessage('Un retrato de aspecto severo. Los ojos parecen seguirte... En la esquina inferior derecha hay un número apenas visible: "8".');
                       // Pista para el código: 482
                 }
             },
-            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '10%', left: '45%', width: '10%', height: '60%' },
+            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '10%', left: '40%', width: '6%', height: '30%' },
                 action: (state) => {
                      setMessage('Un reloj de abuelo cubierto de polvo. Está parado. Las manecillas marcan las 4 y... ¿el número 2 está arañado?.');
                       // Pista para el código: 482
