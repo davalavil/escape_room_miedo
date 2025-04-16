@@ -90,7 +90,7 @@ const rooms = {
         message: 'Un pasillo largo y decrépito. Hay varias puertas y un viejo cuadro en la pared. El aire es pesado.',
         backgroundMusic: bgmSuspense,
         objects: [
-            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '40%', left: '67%', width: '2%', height: '15%' },
+            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '45%', left: '67%', width: '2%', height: '8%' },
                 action: (state) => {
                     if (state.flags.pasillo_codigo_resuelto) {
                         playSound(sfxDoorCreak);
@@ -121,7 +121,7 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '20%', left: '40%', width: '6%', height: '10%' },
+            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '30%', left: '40%', width: '6%', height: '10%' },
                 action: (state) => {
                      setMessage('Un reloj de abuelo cubierto de polvo. Está parado. Las manecillas marcan las 4 y... ¿el número 2 está arañado?.');
                       // Pista para el código: 482
