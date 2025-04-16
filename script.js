@@ -54,7 +54,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'caja_rota', name: 'Caja rota', coords: { top: '72%', left: '32%', width: '7%', height: '7%' },
+            { id: 'caja_rota', name: 'Caja rota', coords: { top: '72%', left: '30%', width: '7%', height: '7%' },
                 action: (state) => {
                     if (!state.flags.sotano_caja_revisada) {
                         setMessage('Remueves unos tablones sueltos y encuentras una vieja llave oxidada.');
