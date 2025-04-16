@@ -443,7 +443,7 @@ function stopMusic() {
 
 function toggleMute() {
     isMuted = !isMuted;
-    muteButton.textContent = isMuted ? '🔊 Unmute' : '🔇 Mute';
+    muteButton.textContent = isMuted ? '🔇 Unmute' : '🔊 Mute';
     if (isMuted) {
         if (currentBGM) currentBGM.pause();
         // Podrías pausar también SFX activos si tuvieras un control más complejo
