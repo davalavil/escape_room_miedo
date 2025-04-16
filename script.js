@@ -38,7 +38,7 @@ const rooms = {
         message: 'Estás en un sótano húmedo y oscuro. Huele a tierra mojada y... a algo más. Hay una puerta de madera al fondo.',
         backgroundMusic: bgmCreepy,
         objects: [
-            { id: 'puerta_madera_sotano', name: 'Puerta de madera', coords: { top: '36%', left: '37%', width: '12%', height: '36%' },
+            { id: 'puerta_madera_sotano', name: 'Puerta de madera', coords: { top: '40%', left: '37%', width: '12%', height: '36%' },
                 action: (state) => {
                     if (state.flags.sotano_puerta_abierta) {
                         playSound(sfxDoorCreak);
@@ -54,7 +54,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'caja_rota', name: 'Caja rota', coords: { top: '60%', left: '14%', width: '15%', height: '15%' },
+            { id: 'caja_rota', name: 'Caja rota', coords: { top: '60%', left: '18%', width: '15%', height: '15%' },
                 action: (state) => {
                     if (!state.flags.sotano_caja_revisada) {
                         setMessage('Remueves unos tablones sueltos y encuentras una vieja llave oxidada.');
