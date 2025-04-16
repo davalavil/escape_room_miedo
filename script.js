@@ -49,7 +49,7 @@ const rooms = {
                     if (state.flags.sotano_puerta_abierta) {
                         playSound(sfxDoorCreak);
                         changeRoom('pasillo');
-                    } else if (state.inventory.includes('llave_oxidada')) {
+                    } else if (state.inventory.includes('key')) {
                          setMessage('La vieja cerradura cede con un chirrido. La puerta está abierta.');
                          playSound(sfxUnlock);
                          state.flags.sotano_puerta_abierta = true;
@@ -64,7 +64,7 @@ const rooms = {
                     if (!state.flags.sotano_caja_revisada) {
                         setMessage('Remueves unos tablones sueltos y encuentras una vieja llave oxidada.');
                         playSound(sfxItemPickup);
-                        addItem('llave_oxidada', 'images/key.png');
+                        addItem('key', 'images/key.png');
                         state.flags.sotano_caja_revisada = true;
                     } else {
                         setMessage('Ya has revisado esta caja.');
@@ -172,10 +172,10 @@ const rooms = {
         objects: [
             { id: 'estanteria_libros', name: 'Estantería', coords: { top: '35%', left: '35%', width: '2%', height: '3%' },
                 action: (state) => {
-                    if (!state.inventory.includes('engranaje_dorado')) {
+                    if (!state.inventory.includes('gear')) {
                         setMessage('Miles de libros. Uno parece fuera de lugar... ¡Ajá! Detrás de un tomo falso, encuentras un pequeño engranaje dorado.');
                         playSound(sfxItemPickup);
-                        addItem('engranaje_dorado', 'images/gear.png');
+                        addItem('gear', 'images/gear.png');
                     } else {
                         setMessage('Ya has buscado bien en las estanterías.');
                     }
@@ -223,10 +223,10 @@ const rooms = {
             },
             { id: 'cama_dosel', name: 'Cama con dosel', coords: { top: '83%', left: '39%', width: '2%', height: '6%' },
                  action: (state) => {
-                     if (!state.inventory.includes('palanca_metalica')) {
+                     if (!state.inventory.includes('crowbar')) {
                          setMessage('Buscas bajo la cama polvorienta y encuentras una palanca metálica fría al tacto.');
                          playSound(sfxItemPickup);
-                         addItem('palanca_metalica', 'images/crowbar.png');
+                         addItem('crowbar', 'images/crowbar.png');
                      } else {
                          setMessage('No parece haber nada más de interés en la cama.');
                      }
@@ -234,7 +234,7 @@ const rooms = {
             },
             { id: 'puerta_pasillo_dorm', name: 'Puerta al Pasillo', coords: { top: '55%', left: '81%', width: '2%', height: '3%' },
                 action: (state) => {
-                    if (!state.flags.dormitorio_puerta_abierta && state.inventory.includes('palanca_metalica')) {
+                    if (!state.flags.dormitorio_puerta_abierta && state.inventory.includes('crowbar')) {
                         setMessage('Usas la palanca para forzar la puerta atascada. ¡Se abre!');
                         playSound(sfxBang);
                         playSound(sfxDoorCreak);
@@ -266,14 +266,14 @@ const rooms = {
         objects: [
             { id: 'puerta_salida', name: 'Puerta de Salida', coords: { top: '47%', left: '51%', width: '1%', height: '4%' },
                 action: (state) => {
-                    if (state.inventory.includes('palanca_metalica') && state.inventory.includes('engranaje_dorado')) {
+                    if (state.inventory.includes('crowbar') && state.inventory.includes('gear')) {
                         setMessage('Colocas el engranaje dorado en una ranura y usas la palanca metálica en un mecanismo. La cerradura hace un ruido sordo y ¡LA PUERTA SE ABRE! Has escapado... ¿o no?');
                         playSound(sfxUnlock);
                         endGame(true); // Victoria
-                    } else if (state.inventory.includes('palanca_metalica')) {
+                    } else if (state.inventory.includes('crowbar')) {
                         setMessage('Hay una ranura que parece necesitar algún tipo de engranaje dorado...');
                         playSound(sfxLocked);
-                    } else if (state.inventory.includes('engranaje_dorado')) {
+                    } else if (state.inventory.includes('gear')) {
                          setMessage('Hay un mecanismo que parece necesitar una palanca resistente para activarlo...');
                          playSound(sfxLocked);
                     } else {
