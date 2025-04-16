@@ -132,7 +132,7 @@ const rooms = {
             {
                 id: 'puerta_dormitorio',
                 name: 'Puerta al Dormitorio',
-                coords: { top: '25%', left: '80%', width: '15%', height: '50%' }, // ¡Asegúrate que las coords sean correctas para tu imagen!
+                coords: { top: '60%', left: '80%', width: '2%', height: '6%' }, // ¡Asegúrate que las coords sean correctas para tu imagen!
                 action: (state) => {
                     // ***** INICIO DE LA MODIFICACIÓN *****
                     // Comprobamos la flag de la OTRA sala (dormitorio) para saber si ya se 'desbloqueó' formalmente desde dentro.
