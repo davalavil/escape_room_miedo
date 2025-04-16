@@ -243,7 +243,7 @@ const rooms = {
         message: 'Un dormitorio inquietante. Una vieja cama con dosel y una mecedora que se mueve sola lentamente...',
         backgroundMusic: bgmSuspense, // Música de cuna distorsionada?
         objects: [
-            { id: 'mecedora', name: 'Mecedora', coords: { top: '50%', left: '20%', width: '20%', height: '30%' },
+            { id: 'mecedora', name: 'Mecedora', coords: { top: '61%', left: '74%', width: '2%', height: '6%' },
                  action: (state) => {
                     setMessage('La mecedora cruje y se balancea sola. Te da escalofríos.');
                     // Susto: La mecedora se para de golpe y suena un golpe
