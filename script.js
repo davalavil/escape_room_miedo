@@ -478,7 +478,8 @@ function clearActionMessage() {
 function addItem(itemId, itemIcon = 'images/item_default.png') {
     if (!inventory.includes(itemId)) {
         inventory.push(itemId);
-        updateInventory(itemIcon);
+        // updateInventory(itemIcon); // <--- COMENTA O ELIMINA ESTA LÍNEA
+        updateInventory();         // <--- AÑADE ESTA LÍNEA (Llama sin parámetro)
         setActionMessage(`Has recogido: ${itemId.replace(/_/g, ' ')}`);
         playSound(sfxItemPickup);
          console.log("Inventario actual:", inventory);
@@ -505,16 +506,26 @@ function removeItem(itemId) {
  * Actualiza la lista de inventario en la UI.
  * @param {string | null} [iconForLastItem=null] - Icono para el último ítem añadido.
  */
-function updateInventory(iconForLastItem = null) {
-    inventoryList.innerHTML = '';
-    inventory.forEach((item, index) => {
+// function updateInventory(iconForLastItem = null) { // <--- COMENTA O ELIMINA ESTA LÍNEA
+function updateInventory() {                      // <--- USA ESTA LÍNEA (Sin parámetro)
+    inventoryList.innerHTML = ''; // Limpiar lista
+    inventory.forEach((item) => { // Ya no necesitamos 'index' para esta lógica
         const li = document.createElement('li');
         const img = document.createElement('img');
-        img.src = (index === inventory.length - 1 && iconForLastItem) ? iconForLastItem : `images/${item}.png`;
+
+        // --- SIEMPRE CONSTRUYE LA RUTA DESDE EL ID DEL ITEM ---
+        img.src = `images/${item}.png`;
+        // --- FIN DE LA LÍNEA MODIFICADA ---
+
         img.alt = item;
-        img.onerror = () => { img.src = 'images/item_default.png'; };
+        // Fallback si la imagen específica no carga
+        img.onerror = () => {
+             // Añadimos un log más detallado para depuración
+             console.warn(`Icono no encontrado o error al cargar: images/${item}.png. Usando default.`);
+             img.src = 'images/item_default.png';
+        };
         li.appendChild(img);
-        li.appendChild(document.createTextNode(item.replace(/_/g, ' ')));
+        li.appendChild(document.createTextNode(item.replace(/_/g, ' '))); // Nombre legible
         inventoryList.appendChild(li);
     });
 }
