@@ -139,7 +139,7 @@ const rooms = {
                 // !!! COORDENADAS DE EJEMPLO - ¡¡DEBES AJUSTARLAS!! !!!
                 // Busca un lugar adecuado en tu imagen del pasillo (room2.jpg)
                 // que parezca una entrada a otra área importante.
-                coords: { top: '20%', left: '55%', width: '20%', height: '60%' }, // <-- AJUSTA ESTO!!!
+                coords: { top: '55%', left: '30%', width: '2%', height: '6%' }, // <-- AJUSTA ESTO!!!
                 action: (state) => {
                     // Podrías añadir una condición aquí si quisieras que estuviera bloqueada
                     // al principio (ej: necesitar una llave específica encontrada en otro lugar),
