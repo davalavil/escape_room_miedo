@@ -269,24 +269,32 @@ const rooms = {
             },
             // Añadir puerta para volver (quizás al pasillo)
              { id: 'puerta_pasillo_dorm', name: 'Puerta al Pasillo', coords: { top: '55%', left: '81%', width: '2%', height: '3%' },
+
                 action: (state) => {
-                    // Esta puerta podría necesitar la palanca para abrirse desde este lado
+                    // 1. Si NO está abierta Y TIENES la palanca:
                     if (!state.flags.dormitorio_puerta_abierta && state.inventory.includes('palanca_metalica')) {
                         setMessage('Usas la palanca para forzar la puerta atascada. ¡Se abre!');
-                        playSound(sfxBang); // Sonido de forzar
+                        playSound(sfxBang);
                         playSound(sfxDoorCreak);
-                         state.flags.dormitorio_puerta_abierta = true;
-                         // Opcional: removeItem('palanca_metalica');
-                    } else if (state.flags.dormitorio_puerta_abierta) {
-                         playSound(sfxDoorCreak);
-                         changeRoom('pasillo');
+                        state.flags.dormitorio_puerta_abierta = true; // Marcas como abierta
+                        // ¿Debería permitir salir AHORA MISMO? Sí, probablemente.
+                        changeRoom('pasillo'); // Añadamos esto para salir justo después de usarla
                     }
+                    // 2. Si YA está abierta:
+                    else if (state.flags.dormitorio_puerta_abierta) {
+                        playSound(sfxDoorCreak);
+                        changeRoom('pasillo'); // Te deja salir
+                    }
+                    // 3. Si NO está abierta Y NO TIENES la palanca:
                     else {
-                         setMessage('La puerta está bloqueada desde este lado. Parece necesitar algo para forzarla.');
-                         playSound(sfxLocked);
+                        setMessage('La puerta está bloqueada desde este lado. Parece necesitar algo para forzarla.');
+                        playSound(sfxLocked);
+                        // !!! NO hay changeRoom aquí !!!
                     }
                 }
-             }
+              
+
+              
         ],
         flags: {
             dormitorio_mecedora_susto: false,
