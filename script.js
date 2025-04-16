@@ -121,13 +121,13 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '40%', left: '40%', width: '3%', height: '4%' },
+            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '41%', left: '42%', width: '2%', height: '4%' },
                 action: (state) => {
                      setMessage('Un reloj de abuelo cubierto de polvo. Está parado. Las manecillas marcan las 4 y... ¿el número 2 está arañado?.');
                       // Pista para el código: 482
                 }
             },
-            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '58%', left: '80%', width: '4%', height: '6%' },
+            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '60%', left: '80%', width: '4%', height: '6%' },
                 action: (state) => {
                      setMessage('Esta puerta parece atascada o bloqueada desde el otro lado.');
                      playSound(sfxLocked);
