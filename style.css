@@ -87,11 +87,16 @@ body {
     border-bottom: 3px solid #444; /* Separa visualmente de la UI */
 }
 
-/* Ãreas Interactivas (Ahora Invisibles por Defecto) */
+/* Ãreas Interactivas (Ahora Invisibles por Defecto) */
 .interactive-area {
     position: absolute; /* PosiciÃ³n relativa al div #room */
-    cursor: pointer; /* Cambia el cursor a una mano */
-
+    /* V V V ESTA ES LA LÍNEA QUE TIENES QUE CAMBIAR V V V */
+    /* cursor: pointer; */ /* Cambia el cursor a una mano */
+    /* ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ */
+    /* Cámbiala a 'default' o 'auto', o simplemente elimínala/coméntala */
+    cursor: default; /* Mantiene el cursor normal (flecha) */
+    /* O podrías usar: cursor: auto; */
+    
     /* --- ESTAS LÃNEAS HACEN EL ÃREA INVISIBLE --- */
     background-color: transparent; /* Sin color de fondo */
     border: none; /* Sin borde */
