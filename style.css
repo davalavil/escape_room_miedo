@@ -16,13 +16,13 @@ body {
 #start-screen {
     text-align: center;
     padding: 30px;
-    background-color: #2a2a2a; /* Fondo ligeramente más claro */
+    background-color: #2a2a2a; /* Fondo ligeramente mÃ¡s claro */
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); /* Sombra roja sutil */
 }
 
 #start-screen h1 {
-     font-family: 'Creepster', cursive; /* Fuente temática para el título */
+     font-family: 'Creepster', cursive; /* Fuente temÃ¡tica para el tÃ­tulo */
      color: #b71c1c; /* Rojo oscuro */
      font-size: 3em;
      margin-bottom: 15px;
@@ -38,7 +38,7 @@ body {
 }
 
 #start-button {
-    padding: 12px 25px; /* Botón más grande */
+    padding: 12px 25px; /* BotÃ³n mÃ¡s grande */
     font-size: 1.3em;
     cursor: pointer;
     background-color: #b71c1c; /* Rojo oscuro */
@@ -49,7 +49,7 @@ body {
 }
 
 #start-button:hover {
-    background-color: #e53935; /* Rojo más brillante al pasar el ratón */
+    background-color: #e53935; /* Rojo mÃ¡s brillante al pasar el ratÃ³n */
     transform: scale(1.05); /* Efecto de ligero crecimiento */
 }
 
@@ -64,50 +64,56 @@ body {
     flex-direction: column;
     align-items: center;
     width: 95%;
-    max-width: 1000px; /* Ancho máximo del juego */
-    background-color: #111; /* Fondo interior aún más oscuro */
-    border: 3px solid #444; /* Borde más grueso */
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8); /* Sombra más pronunciada */
+    max-width: 1000px; /* Ancho mÃ¡ximo del juego */
+    background-color: #111; /* Fondo interior aÃºn mÃ¡s oscuro */
+    border: 3px solid #444; /* Borde mÃ¡s grueso */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8); /* Sombra mÃ¡s pronunciada */
     border-radius: 5px; /* Bordes ligeramente redondeados */
 }
 
-/* Área de la Imagen de la Sala */
+/* Ãrea de la Imagen de la Sala */
 #room {
     position: relative; /* Fundamental para posicionar objetos interactivos */
     width: 100%;
-    max-width: 800px; /* Ajusta según el ancho de tus imágenes */
-    margin: 0 auto; /* Centrar imagen si es más estrecha que el max-width */
+    max-width: 800px; /* Ajusta segÃºn el ancho de tus imÃ¡genes */
+    margin: 0 auto; /* Centrar imagen si es mÃ¡s estrecha que el max-width */
     line-height: 0; /* Evita espacio extra debajo de la imagen */
 }
 
 #room-image {
     display: block; /* Asegura que la imagen sea un bloque */
     width: 100%;
-    height: auto; /* Mantiene la proporción */
+    height: auto; /* Mantiene la proporciÃ³n */
     border-bottom: 3px solid #444; /* Separa visualmente de la UI */
 }
 
-/* Áreas Interactivas (Ahora Invisibles por Defecto) */
+/* Ãreas Interactivas (Ahora Invisibles por Defecto) */
 .interactive-area {
-    position: absolute; /* Posición relativa al div #room */
+    position: absolute; /* PosiciÃ³n relativa al div #room */
     cursor: pointer; /* Cambia el cursor a una mano */
 
-    /* --- ESTAS LÍNEAS HACEN EL ÁREA INVISIBLE --- */
+    /* --- ESTAS LÃNEAS HACEN EL ÃREA INVISIBLE --- */
     background-color: transparent; /* Sin color de fondo */
     border: none; /* Sin borde */
-    /* --- FIN DE LÍNEAS PARA INVISIBILIDAD --- */
+    /* --- FIN DE LÃNEAS PARA INVISIBILIDAD --- */
 
-    /* Para depuración (comentado): */
+    /* Para depuraciÃ³n (descomenta para ver las cajas): */
     /* background-color: rgba(255, 255, 0, 0.2); */
     /* border: 1px dashed yellow; */
 
-    /* El tamaño y posición se definen en JS para cada objeto */
+    /* El tamaÃ±o y posiciÃ³n se definen en JS para cada objeto */
     /* top: 10%; left: 20%; width: 15%; height: 20%; */
 }
 
-/* Efecto al Pasar el Ratón por Área Interactiva (VACÍO PARA NINGÚN EFECTO) */
+/* Efecto al Pasar el RatÃ³n por Ãrea Interactiva (Opcional) */
 .interactive-area:hover {
-    /* Intencionalmente vacío para que no haya ningún cambio visual al pasar el ratón */
+     /* Puedes aÃ±adir un efecto sutil aquÃ­ si quieres, como un borde tenue */
+     /* Ejemplo: */
+     /* border: 1px solid rgba(255, 255, 255, 0.3); */
+
+     /* Para depuraciÃ³n (descomenta para ver las cajas al pasar el ratÃ³n): */
+     /* background-color: rgba(255, 255, 0, 0.4); */
+     /* border: 1px solid red; */
 }
 
 /* Contenedor de la Interfaz de Usuario (Mensajes, Timer, Inventario) */
@@ -116,18 +122,18 @@ body {
     justify-content: space-between; /* Distribuye los elementos */
     align-items: flex-start; /* Alinea arriba por si tienen alturas distintas */
     width: 100%;
-    padding: 15px; /* Más padding */
+    padding: 15px; /* MÃ¡s padding */
     background-color: #222; /* Fondo de la UI */
     box-sizing: border-box; /* Padding incluido en el ancho */
 }
 
-/* Área de Mensajes */
+/* Ãrea de Mensajes */
 #message-area {
     width: 55%; /* Ancho ajustado para dejar espacio al timer */
     background-color: #1c1c1c;
-    padding: 15px; /* Más padding */
+    padding: 15px; /* MÃ¡s padding */
     border-radius: 5px;
-    min-height: 70px; /* Altura mínima mayor */
+    min-height: 70px; /* Altura mÃ­nima mayor */
     border: 1px solid #333;
     display: flex; /* Para mejor control vertical */
     flex-direction: column;
@@ -146,13 +152,13 @@ body {
 
 #action-message {
     font-weight: bold;
-    color: #eee; /* Mensaje de acción más brillante */
+    color: #eee; /* Mensaje de acciÃ³n mÃ¡s brillante */
     font-size: 1em;
 }
 
-/* Área del Temporizador */
+/* Ãrea del Temporizador */
 #timer-area {
-    width: auto; /* Ajusta el ancho automáticamente */
+    width: auto; /* Ajusta el ancho automÃ¡ticamente */
     padding: 10px 15px; /* Padding ajustado */
     margin: 0 15px; /* Margen a los lados */
     background-color: #1c1c1c;
@@ -166,43 +172,43 @@ body {
 
 #timer-display {
     font-weight: bold;
-    font-size: 1.6em; /* Tamaño grande para el tiempo */
-    color: #ffc107; /* Color ámbar/amarillo inicial */
-    display: block; /* Ocupa su línea */
-    margin-top: 5px; /* Espacio sobre el número */
-    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para números */
-    transition: color 0.5s ease-in-out; /* Transición suave de color */
+    font-size: 1.6em; /* TamaÃ±o grande para el tiempo */
+    color: #ffc107; /* Color Ã¡mbar/amarillo inicial */
+    display: block; /* Ocupa su lÃ­nea */
+    margin-top: 5px; /* Espacio sobre el nÃºmero */
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para nÃºmeros */
+    transition: color 0.5s ease-in-out; /* TransiciÃ³n suave de color */
 }
 
 /* Clase para cuando queda poco tiempo */
 .low-time {
     color: #e53935 !important; /* Rojo brillante, !important por si acaso */
-    animation: pulse 1s infinite; /* Animación de latido */
+    animation: pulse 1s infinite; /* AnimaciÃ³n de latido */
 }
 
-/* Animación de Latido */
+/* AnimaciÃ³n de Latido */
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.08); } /* Aumenta ligeramente el tamaño */
+  50% { transform: scale(1.08); } /* Aumenta ligeramente el tamaÃ±o */
   100% { transform: scale(1); }
 }
 
-/* Área del Inventario */
+/* Ãrea del Inventario */
 #inventory-area {
     width: 25%; /* Ancho ajustado */
     background-color: #1c1c1c;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #333;
-    min-height: 70px; /* Altura mínima similar a mensajes */
+    min-height: 70px; /* Altura mÃ­nima similar a mensajes */
 }
 
 #inventory-area h3 {
     margin-top: 0;
-    margin-bottom: 8px; /* Más espacio bajo el título */
+    margin-bottom: 8px; /* MÃ¡s espacio bajo el tÃ­tulo */
     color: #b71c1c; /* Rojo oscuro */
-    font-family: 'Creepster', cursive; /* Fuente temática */
-    font-size: 1.7em; /* Título más grande */
+    font-family: 'Creepster', cursive; /* Fuente temÃ¡tica */
+    font-size: 1.7em; /* TÃ­tulo mÃ¡s grande */
     text-align: center;
 }
 
@@ -213,20 +219,20 @@ body {
 }
 
 #inventory-list li {
-    margin-bottom: 6px; /* Espacio entre ítems */
+    margin-bottom: 6px; /* Espacio entre Ã­tems */
     display: flex;
     align-items: center; /* Alinea icono y texto */
     font-size: 0.9em;
 }
 
 #inventory-list li img {
-    width: 24px; /* Icono ligeramente más grande */
+    width: 24px; /* Icono ligeramente mÃ¡s grande */
     height: 24px;
-    margin-right: 10px; /* Más espacio entre icono y texto */
+    margin-right: 10px; /* MÃ¡s espacio entre icono y texto */
     vertical-align: middle;
 }
 
-/* Controles de Audio (Botón Mute) */
+/* Controles de Audio (BotÃ³n Mute) */
 #audio-controls {
     position: fixed; /* Fijo en la pantalla */
     top: 15px;
@@ -260,22 +266,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* ¡Máxima prioridad visual! */
+    z-index: 9999; /* Â¡MÃ¡xima prioridad visual! */
     opacity: 0; /* Invisible por defecto */
-    transition: opacity 0.08s ease-in; /* Transición muy rápida para aparecer */
-    pointer-events: none; /* No interfiere con clics cuando está oculto */
+    transition: opacity 0.08s ease-in; /* TransiciÃ³n muy rÃ¡pida para aparecer */
+    pointer-events: none; /* No interfiere con clics cuando estÃ¡ oculto */
 }
 
 #jumpscare img {
     max-width: 90%; /* Puede ocupar gran parte de la pantalla */
     max-height: 90%;
     object-fit: contain; /* Evita deformar la imagen */
-    /* Opcional: añadir algún efecto visual a la imagen */
+    /* Opcional: aÃ±adir algÃºn efecto visual a la imagen */
     /* filter: brightness(1.2) contrast(1.1); */
-    animation: shake 0.3s linear; /* Animación de temblor */
+    animation: shake 0.3s linear; /* AnimaciÃ³n de temblor */
 }
 
-/* Animación de Temblor para el susto */
+/* AnimaciÃ³n de Temblor para el susto */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-8px) rotate(-2deg); }
@@ -286,7 +292,7 @@ body {
 
 .jumpscare-visible {
     opacity: 1 !important; /* Asegura visibilidad */
-    pointer-events: auto; /* Permite interacción si fuera necesario (normalmente no) */
+    pointer-events: auto; /* Permite interacciÃ³n si fuera necesario (normalmente no) */
 }
 
 .jumpscare-hidden {
@@ -296,9 +302,9 @@ body {
 
 /* Estilos para la Pantalla Final (Creada por JS) */
 #end-screen {
-    /* Estilos definidos principalmente en JS, pero puedes añadir aquí */
-     z-index: 1000; /* Asegura que esté visible */
-     max-width: 500px; /* Ancho máximo para la pantalla final */
+    /* Estilos definidos principalmente en JS, pero puedes aÃ±adir aquÃ­ */
+     z-index: 1000; /* Asegura que estÃ© visible */
+     max-width: 500px; /* Ancho mÃ¡ximo para la pantalla final */
      box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
 }
 
@@ -324,13 +330,13 @@ body {
 }
 
 
-/* --- Media Queries para Diseño Responsivo --- */
+/* --- Media Queries para DiseÃ±o Responsivo --- */
 
-/* Para pantallas más pequeñas (tablets y móviles grandes) */
+/* Para pantallas mÃ¡s pequeÃ±as (tablets y mÃ³viles grandes) */
 @media (max-width: 768px) {
     #game-container {
         width: 100%; /* Ocupa todo el ancho */
-        border: none; /* Quitar borde en pantallas pequeñas */
+        border: none; /* Quitar borde en pantallas pequeÃ±as */
         border-radius: 0;
     }
 
@@ -343,11 +349,11 @@ body {
     #message-area, #inventory-area, #timer-area {
         width: calc(100% - 20px); /* Ancho completo menos padding/margin */
         margin: 0 auto 10px auto; /* Centrado y con margen inferior */
-        align-self: auto; /* Resetea alineación vertical */
-        box-sizing: border-box; /* Asegura que el padding esté incluido */
+        align-self: auto; /* Resetea alineaciÃ³n vertical */
+        box-sizing: border-box; /* Asegura que el padding estÃ© incluido */
     }
 
-     /* Reordenar elementos en vista móvil (opcional) */
+     /* Reordenar elementos en vista mÃ³vil (opcional) */
      #timer-area { order: 1; } /* Timer arriba */
      #message-area { order: 2; } /* Mensajes en medio */
      #inventory-area { order: 3; } /* Inventario abajo */
@@ -361,7 +367,7 @@ body {
      #inventory-area h3 { font-size: 1.5em; }
 }
 
-/* Para pantallas muy pequeñas (móviles) */
+/* Para pantallas muy pequeÃ±as (mÃ³viles) */
 @media (max-width: 480px) {
      #start-screen h1 { font-size: 2em; }
      #start-button { font-size: 1.1em; padding: 10px 20px; }
