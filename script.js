@@ -115,7 +115,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'cuadro_antiguo', name: 'Cuadro antiguo', coords: { top: '50%', left: '23%', width: '10%', height: '15%' },
+            { id: 'cuadro_antiguo', name: 'Cuadro antiguo', coords: { top: '40%', left: '23%', width: '5%', height: '5%' },
                 action: (state) => {
                      setMessage('Un retrato de aspecto severo. Los ojos parecen seguirte... En la esquina inferior derecha hay un número apenas visible: "8".');
                       // Pista para el código: 482
