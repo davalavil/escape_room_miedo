@@ -90,7 +90,7 @@ const rooms = {
         message: 'Un pasillo largo y decrépito. Hay varias puertas y un viejo cuadro en la pared. El aire es pesado.',
         backgroundMusic: bgmSuspense,
         objects: [
-            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '40%', left: '67%', width: '4%', height: '30%' },
+            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '40%', left: '67%', width: '2%', height: '15%' },
                 action: (state) => {
                     if (state.flags.pasillo_codigo_resuelto) {
                         playSound(sfxDoorCreak);
@@ -127,13 +127,13 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '25%', left: '80%', width: '15%', height: '50%' },
+            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '25%', left: '80%', width: '15%', height: '20%' },
                 action: (state) => {
                      setMessage('Esta puerta parece atascada o bloqueada desde el otro lado.');
                      playSound(sfxLocked);
                 }
              },
-             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '40%', left: '1%', width: '10%', height: '30%' }, // Asumiendo que está a la izquierda
+             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '40%', left: '1%', width: '10%', height: '20%' }, // Asumiendo que está a la izquierda
                 action: (state) => {
                     playSound(sfxDoorCreak);
                     changeRoom('sotano');
