@@ -161,7 +161,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'escritorio_biblio', name: 'Escritorio', coords: { top: '63%', left: '38%', width: '7%', height: '3%' },
+            { id: 'escritorio_biblio', name: 'Escritorio', coords: { top: '69%', left: '35%', width: '7%', height: '3%' },
                  action: (state) => {
                      if (!state.flags.biblioteca_nota_leida) {
                          setMessage('Sobre el escritorio hay una nota: "El guardián final requiere el metal del tiempo y el oro del saber..."');
