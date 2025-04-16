@@ -127,13 +127,13 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '60%', left: '80%', width: '4%', height: '6%' },
+            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '60%', left: '80%', width: '2%', height: '5%' },
                 action: (state) => {
                      setMessage('Esta puerta parece atascada o bloqueada desde el otro lado.');
                      playSound(sfxLocked);
                 }
              },
-             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '40%', left: '1%', width: '10%', height: '20%' }, // Asumiendo que está a la izquierda
+             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '55%', left: '10%', width: '10%', height: '20%' }, // Asumiendo que está a la izquierda
                 action: (state) => {
                     playSound(sfxDoorCreak);
                     changeRoom('sotano');
