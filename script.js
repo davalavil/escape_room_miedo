@@ -24,7 +24,7 @@ const sfxBang = document.getElementById('sfx-bang');
 
 let currentRoom = null;
 let inventory = [];
-let isMuted = true;
+let isMuted = false;
 let currentBGM = null;
 
 // --- Definición de las Salas y Objetos ---
