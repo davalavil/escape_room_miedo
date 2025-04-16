@@ -121,7 +121,7 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '10%', left: '70%', width: '15%', height: '80%' },
+            { id: 'reloj_parado', name: 'Reloj de pie parado', coords: { top: '10%', left: '45%', width: '10%', height: '60%' },
                 action: (state) => {
                      setMessage('Un reloj de abuelo cubierto de polvo. Está parado. Las manecillas marcan las 4 y... ¿el número 2 está arañado?.');
                       // Pista para el código: 482
