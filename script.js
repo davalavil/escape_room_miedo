@@ -10,7 +10,6 @@ const inventoryList = document.getElementById('inventory-list');
 const jumpscareElement = document.getElementById('jumpscare');
 const jumpscareImage = document.getElementById('jumpscare-image');
 const muteButton = document.getElementById('mute-button');
-// --- NUEVA REFERENCIA PARA EL TEMPORIZADOR ---
 const timerDisplay = document.getElementById('timer-display');
 
 // --- Elementos de Audio ---
@@ -23,20 +22,20 @@ const sfxUnlock = document.getElementById('sfx-unlock');
 const sfxLocked = document.getElementById('sfx-locked');
 const sfxWhisper = document.getElementById('sfx-whisper');
 const sfxBang = document.getElementById('sfx-bang');
-// Añade más SFX aquí...
 
 // --- Variables de Estado del Juego ---
 let currentRoom = null;
 let inventory = [];
 let isMuted = false;
 let currentBGM = null;
-// --- NUEVAS VARIABLES PARA EL TEMPORIZADOR ---
-let timerInterval = null; // Para guardar el ID del intervalo y poder detenerlo
-const initialTime = 10 * 60; // Tiempo inicial en segundos (10 minutos)
-let remainingTime = initialTime; // Tiempo restante actual en segundos
+let timerInterval = null;
+const initialTime = 10 * 60;
+let remainingTime = initialTime;
+// *** NUEVO: Contador para clics inútiles ***
+let uselessClickCounter = 0;
+const USELESS_CLICK_LIMIT = 10; // Límite de clics antes del susto
 
 // --- Definición de las Salas y Objetos ---
-// Mantenemos tus coordenadas y lógica de salas/objetos
 const rooms = {
     // --- SALA 1: EL SÓTANO ---
     sotano: {
@@ -74,13 +73,10 @@ const rooms = {
              { id: 'tuberia_sotano', name: 'Tubería que gotea', coords: { top: '38%', left: '35%', width: '10%', height: '40%' },
                  action: (state) => {
                      setMessage('Una tubería vieja y oxidada gotea sin cesar. El sonido es inquietante.');
-                     // ¡Susto potencial!
-                     // V PROBABILIDAD CAMBIADA A 70% V
-                     if (!state.flags.sotano_tuberia_susto && Math.random() < 0.7) { // 70% de probabilidad
-                        // V DURACIÓN CAMBIADA A 2000 ms (2 segundos) V
-                        triggerJumpScare('images/scare1.png', sfxJumpScare1, 2000); // Imagen, sonido, duración 2000 ms
-                        playSound(sfxWhisper); // Un susurro después
-                        state.flags.sotano_tuberia_susto = true; // Solo una vez
+                     if (!state.flags.sotano_tuberia_susto && Math.random() < 0.7) {
+                        triggerJumpScare('images/scare1.png', sfxJumpScare1, 2000);
+                        playSound(sfxWhisper);
+                        state.flags.sotano_tuberia_susto = true;
                      }
                  }
              }
@@ -239,7 +235,7 @@ const rooms = {
                         playSound(sfxBang);
                         playSound(sfxDoorCreak);
                         state.flags.dormitorio_puerta_abierta = true;
-                        changeRoom('pasillo'); // Salir tras usarla
+                        changeRoom('pasillo');
                     }
                     else if (state.flags.dormitorio_puerta_abierta) {
                         playSound(sfxDoorCreak);
@@ -248,7 +244,6 @@ const rooms = {
                     else {
                         setMessage('La puerta está bloqueada desde este lado. Parece necesitar algo para forzarla.');
                         playSound(sfxLocked);
-                        // No te deja salir si no tienes la palanca
                     }
                 }
             }
@@ -269,7 +264,7 @@ const rooms = {
                     if (state.inventory.includes('crowbar') && state.inventory.includes('gear')) {
                         setMessage('Colocas el engranaje dorado en una ranura y usas la palanca metálica en un mecanismo. La cerradura hace un ruido sordo y ¡LA PUERTA SE ABRE! Has escapado... ¿o no?');
                         playSound(sfxUnlock);
-                        endGame(true); // Victoria
+                        endGame(true);
                     } else if (state.inventory.includes('crowbar')) {
                         setMessage('Hay una ranura que parece necesitar algún tipo de engranaje dorado...');
                         playSound(sfxLocked);
@@ -294,24 +289,17 @@ const rooms = {
 };
 
 // --- IMPORTANTE: Copia profunda inicial para resetear flags ---
-// Se hace UNA VEZ al cargar el script.
 const roomsDataForReset = JSON.parse(JSON.stringify(rooms));
 
 
 // --- Funciones del Juego ---
 
-/**
- * Actualiza el elemento HTML del temporizador con el tiempo restante formateado.
- * @param {number} seconds - El número total de segundos restantes.
- */
 function updateTimerDisplay(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(remainingSeconds).padStart(2, '0');
-
     timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
-
     if (seconds <= 60 && seconds > 0) {
         timerDisplay.classList.add('low-time');
     } else {
@@ -319,96 +307,69 @@ function updateTimerDisplay(seconds) {
     }
     if (seconds <= 0) {
          timerDisplay.classList.remove('low-time');
-         timerDisplay.style.color = '#b71c1c'; // Rojo oscuro al llegar a 0
+         timerDisplay.style.color = '#b71c1c';
     } else {
-         // Restaura el color si no está en low-time ni en 0
-         if (seconds > 60) timerDisplay.style.color = '#ffc107'; // Color normal
+         if (seconds > 60) timerDisplay.style.color = '#ffc107';
     }
 }
 
-/**
- * Inicia el contador del temporizador.
- */
 function startTimer() {
-    if (timerInterval) {
-        clearInterval(timerInterval);
-    }
+    if (timerInterval) { clearInterval(timerInterval); }
     remainingTime = initialTime;
-    updateTimerDisplay(remainingTime); // Muestra tiempo inicial
-
+    updateTimerDisplay(remainingTime);
     timerInterval = setInterval(() => {
         remainingTime--;
         updateTimerDisplay(remainingTime);
-
         if (remainingTime <= 0) {
             console.log("¡Tiempo agotado!");
             clearInterval(timerInterval);
             timerInterval = null;
-            // Podrías añadir un sonido de tiempo agotado aquí
             setMessage("El tiempo se ha agotado... La oscuridad te consume.");
-            endGame(false); // Derrota por tiempo
+            endGame(false);
         }
     }, 1000);
 }
 
-/**
- * Inicia el juego.
- */
 function startGame() {
     console.log("Iniciando juego...");
+    uselessClickCounter = 0; // *** NUEVO: Resetear contador de clics inútiles ***
     startScreen.style.display = 'none';
     gameContainer.style.display = 'flex';
-    inventory = []; // Reinicia inventario
-
-    // --- Reinicio de Flags usando la copia inicial ---
+    inventory = [];
     for (const roomKey in rooms) {
-        if (rooms[roomKey].flags) { // Si la sala actual tiene flags
-             // Busca la definición inicial de esta sala en la copia
+        if (rooms[roomKey].flags) {
             const initialRoomData = roomsDataForReset[roomKey];
             if (initialRoomData && initialRoomData.flags) {
-                // Restaura las flags a partir de la copia inicial
                 rooms[roomKey].flags = { ...initialRoomData.flags };
-                 console.log(`Flags reseteadas para ${roomKey}:`, rooms[roomKey].flags);
             } else {
-                // Si por alguna razón no hay flags iniciales (no debería pasar si están definidas)
                 rooms[roomKey].flags = {};
             }
         }
     }
-    // --- Fin del Reinicio de Flags ---
-
-    updateInventory(); // Actualiza UI de inventario (vacío)
-    changeRoom('sotano'); // Carga sala inicial
-    // La música se inicia en changeRoom
-    startTimer(); // Inicia el temporizador
+    updateInventory();
+    changeRoom('sotano');
+    startTimer();
 }
 
-/**
- * Cambia la sala actual.
- * @param {string} roomId - ID de la sala a cargar.
- */
 function changeRoom(roomId) {
     if (!rooms[roomId]) {
         console.error(`Error: La sala "${roomId}" no existe.`);
         return;
     }
+    uselessClickCounter = 0; // *** NUEVO: Resetear contador al cambiar de sala ***
     currentRoom = rooms[roomId];
     roomImage.src = currentRoom.image;
     setMessage(currentRoom.message);
     clearActionMessage();
     renderInteractiveObjects();
-    playMusic(currentRoom.backgroundMusic); // Asegura que la música correcta suene
-     console.log(`Cambiado a la sala: ${roomId}`);
-     console.log("Flags actuales:", currentRoom.flags); // Log para depurar flags al cambiar sala
+    playMusic(currentRoom.backgroundMusic);
+    console.log(`Cambiado a la sala: ${roomId}`);
+    console.log("Flags actuales:", currentRoom.flags);
 }
 
-/**
- * Dibuja las áreas interactivas de la sala actual.
- */
 function renderInteractiveObjects() {
     const existingAreas = roomElement.querySelectorAll('.interactive-area');
     existingAreas.forEach(area => area.remove());
-
     if (currentRoom.objects) {
         currentRoom.objects.forEach(obj => {
             const area = document.createElement('div');
@@ -418,20 +379,15 @@ function renderInteractiveObjects() {
             area.style.width = obj.coords.width;
             area.style.height = obj.coords.height;
             area.dataset.objectId = obj.id;
-            // V V V ESTA ES LA LÍNEA QUE TIENES QUE QUITAR O COMENTAR V V V
-            // area.title = obj.name; // Tooltip con el nombre
-            // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+            // area.title = obj.name; // Tooltip quitado
             area.addEventListener('click', () => handleInteraction(obj.id));
             roomElement.appendChild(area);
         });
     }
 }
 
-/**
- * Maneja la interacción con un objeto.
- * @param {string} objectId - ID del objeto clickeado.
- */
 function handleInteraction(objectId) {
+    uselessClickCounter = 0; // *** NUEVO: Resetear contador al intentar interactuar ***
     const obj = currentRoom.objects.find(o => o.id === objectId);
     if (obj && obj.action) {
         console.log(`Interactuando con: ${objectId}`);
@@ -442,101 +398,80 @@ function handleInteraction(objectId) {
         obj.action(gameState);
     } else {
         console.warn(`Objeto interactivo no encontrado o sin acción: ${objectId}`);
-         setActionMessage("No puedes interactuar con eso.");
+        setActionMessage("No puedes interactuar con eso.");
+        // *** NUEVO: Podríamos incrementar el contador aquí si la interacción es "falsa", pero lo simplificamos ***
+        // checkUselessClick(); // No lo hacemos aquí, lo hacemos en el listener del fondo
     }
 }
 
-/**
- * Muestra un mensaje principal.
- * @param {string} text - Texto a mostrar.
- */
-function setMessage(text) {
-    roomMessage.textContent = text;
-    // clearActionMessage(); // Decidí quitar esto para que los mensajes de acción persistan un poco más
+// *** NUEVO: Función para comprobar y ejecutar susto por clics inútiles ***
+function checkUselessClick() {
+    uselessClickCounter++;
+    console.log(`Clic inútil número: ${uselessClickCounter}`);
+    if (uselessClickCounter > USELESS_CLICK_LIMIT) {
+        console.log("¡Susto por clics inútiles!");
+        // Usamos duración corta (700ms) para este susto, diferente al de la tubería
+        triggerJumpScare('images/scare1.png', sfxJumpScare1, 700);
+        uselessClickCounter = 0; // Resetea después del susto
+    }
 }
 
-/**
- * Muestra un mensaje de acción.
- * @param {string} text - Texto a mostrar.
- */
+// *** NUEVO: Listener para clics en el fondo de la sala ***
+roomElement.addEventListener('click', (event) => {
+    // Comprueba si el clic fue DIRECTAMENTE en el contenedor de la sala
+    // o en la imagen de fondo, y NO en un área interactiva que ya
+    // maneja su propio evento de clic (y resetea el contador).
+    if (event.target === roomElement || event.target === roomImage) {
+         // También podrías comprobar !event.target.classList.contains('interactive-area')
+         // pero comprobar el target directo suele ser suficiente si las áreas cubren bien.
+        checkUselessClick();
+    }
+    // Si el clic fue en un '.interactive-area', el contador ya se reseteó en handleInteraction.
+});
+
+
+function setMessage(text) {
+    roomMessage.textContent = text;
+}
+
 function setActionMessage(text) {
     actionMessage.textContent = text;
 }
 
-/**
- * Limpia el mensaje de acción.
- */
 function clearActionMessage() {
      actionMessage.textContent = "";
 }
 
-/**
- * Añade un ítem al inventario.
- * @param {string} itemId - ID del ítem.
- * @param {string} [itemIcon='images/item_default.png'] - Icono del ítem.
- */
 function addItem(itemId, itemIcon = 'images/item_default.png') {
     if (!inventory.includes(itemId)) {
         inventory.push(itemId);
-        // updateInventory(itemIcon); // <--- COMENTA O ELIMINA ESTA LÍNEA
-        updateInventory();         // <--- AÑADE ESTA LÍNEA (Llama sin parámetro)
-        setActionMessage(`Has recogido: ${itemId.replace(/_/g, ' ')}`);
-        playSound(sfxItemPickup);
-         console.log("Inventario actual:", inventory);
-    } else {
-         setActionMessage(`Ya tienes ${itemId.replace(/_/g, ' ')}.`);
-    }
-}
-
-/**
- * Añade un ítem al inventario.
- * @param {string} itemId - ID del ítem.
- * @param {string} [itemIcon='images/item_default.png'] - Icono del ítem (ya no se pasa a updateInventory).
- */
-function addItem(itemId, itemIcon = 'images/item_default.png') { // Mantenemos el parámetro por si acaso, pero no lo usamos abajo
-    if (!inventory.includes(itemId)) {
-        inventory.push(itemId);
-        // updateInventory(itemIcon); // <--- LÍNEA ANTERIOR COMENTADA/ELIMINADA
-        updateInventory();         // <--- NUEVA LLAMADA (sin parámetro de icono)
+        updateInventory();
         setActionMessage(`Has recogido: ${itemId.replace(/_/g, ' ')}`);
         playSound(sfxItemPickup);
         console.log("Inventario actual:", inventory);
+         uselessClickCounter = 0; // *** NUEVO: Resetear contador al añadir item ***
     } else {
          setActionMessage(`Ya tienes ${itemId.replace(/_/g, ' ')}.`);
     }
 }
 
-
-/**
- * Actualiza la lista de inventario en la UI.
- * ¡YA NO ACEPTA el parámetro iconForLastItem!
- */
-function updateInventory() {  // <--- FIRMA DE LA FUNCIÓN MODIFICADA
-    inventoryList.innerHTML = ''; // Limpiar lista
-    inventory.forEach((item) => { // Ya no necesitamos 'index' aquí
+function updateInventory() {
+    inventoryList.innerHTML = '';
+    inventory.forEach((item) => {
         const li = document.createElement('li');
         const img = document.createElement('img');
-
-        // --- SIEMPRE CONSTRUYE LA RUTA DESDE EL ID DEL ITEM ---
-        img.src = `images/${item}.png`; // Construye la ruta consistentemente
-        // --- FIN DE LA LÍNEA MODIFICADA ---
-
+        img.src = `images/${item}.png`;
         img.alt = item;
-        // Fallback si la imagen específica no carga (con log mejorado)
         img.onerror = () => {
              console.warn(`Icono no encontrado o error al cargar: 'images/${item}.png'. Usando default.`);
-             img.src = 'images/item_default.png'; // Usa un icono genérico si falla
+             img.src = 'images/item_default.png';
         };
         li.appendChild(img);
-        li.appendChild(document.createTextNode(item.replace(/_/g, ' '))); // Nombre legible
+        li.appendChild(document.createTextNode(item.replace(/_/g, ' ')));
         inventoryList.appendChild(li);
     });
 }
 
-/**
- * Reproduce un efecto de sonido.
- * @param {HTMLAudioElement} audioElement - Elemento de audio a reproducir.
- */
 function playSound(audioElement) {
     if (!isMuted && audioElement) {
          audioElement.currentTime = 0;
@@ -544,10 +479,6 @@ function playSound(audioElement) {
     }
 }
 
-/**
- * Reproduce música de fondo.
- * @param {HTMLAudioElement | null} musicElement - Elemento de audio a reproducir o null.
- */
 function playMusic(musicElement) {
     if (currentBGM === musicElement && currentBGM && !currentBGM.paused) return;
     if (currentBGM) {
@@ -561,9 +492,6 @@ function playMusic(musicElement) {
     }
 }
 
-/**
- * Detiene la música de fondo.
- */
 function stopMusic() {
     if (currentBGM) {
         currentBGM.pause();
@@ -572,11 +500,11 @@ function stopMusic() {
     currentBGM = null;
 }
 
-/**
- * Activa/Desactiva el sonido.
- */
 function toggleMute() {
     isMuted = !isMuted;
+    // *** CORRECCIÓN: El texto inicial del botón en HTML era Mute con icono volumen ***
+    // *** Asegurémonos de que la lógica sea consistente ***
+    // Si ahora está muteado (isMuted es true), el botón debe mostrar Unmute con icono SIN volumen
     muteButton.textContent = isMuted ? '🔊 Unmute' : '🔇 Mute';
     if (isMuted) {
         if (currentBGM) currentBGM.pause();
@@ -586,49 +514,34 @@ function toggleMute() {
     console.log("Muted state:", isMuted);
 }
 
-/**
- * Muestra un jumpscare.
- * @param {string} imageSrc - Ruta de la imagen del susto.
- * @param {HTMLAudioElement} soundEffect - Sonido del susto.
- * @param {number} [duration=1000] - Duración en ms.
- */
-function triggerJumpScare(imageSrc, soundEffect, duration = 700) { // Duración ligeramente menor
+
+function triggerJumpScare(imageSrc, soundEffect, duration = 700) { // Duración por defecto 700ms
     console.log("¡SUSTO!");
     jumpscareImage.src = imageSrc;
     jumpscareElement.classList.remove('jumpscare-hidden');
     jumpscareElement.classList.add('jumpscare-visible');
     playSound(soundEffect);
-
     setTimeout(() => {
         jumpscareElement.classList.remove('jumpscare-visible');
         jumpscareElement.classList.add('jumpscare-hidden');
     }, duration);
 }
 
-/**
- * Termina el juego.
- * @param {boolean} isVictory - True si es victoria, false si es derrota.
- */
 function endGame(isVictory) {
     console.log("Fin del juego. Victoria:", isVictory);
-
-    // --- DETENER TEMPORIZADOR ---
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
     }
-    // --- ---
+    stopMusic();
+    gameContainer.style.display = 'none';
 
-    stopMusic(); // Detiene la música
-    gameContainer.style.display = 'none'; // Oculta juego
-
-    // --- Crear pantalla final dinámicamente ---
     const endScreen = document.createElement('div');
     endScreen.id = 'end-screen';
     endScreen.style.textAlign = 'center';
     endScreen.style.padding = '30px';
     endScreen.style.backgroundColor = '#111';
-    endScreen.style.border = `2px solid ${isVictory ? '#4CAF50' : '#b71c1c'}`; // Borde verde o rojo
+    endScreen.style.border = `2px solid ${isVictory ? '#4CAF50' : '#b71c1c'}`;
     endScreen.style.borderRadius = '10px';
     endScreen.style.color = '#eee';
     endScreen.style.position = 'absolute';
@@ -636,7 +549,7 @@ function endGame(isVictory) {
     endScreen.style.left = '50%';
     endScreen.style.transform = 'translate(-50%, -50%)';
     endScreen.style.zIndex = '1000';
-    endScreen.style.maxWidth = '500px'; // Ancho máximo
+    endScreen.style.maxWidth = '500px';
 
     const title = document.createElement('h1');
     title.style.fontFamily = "'Creepster', cursive";
@@ -647,7 +560,6 @@ function endGame(isVictory) {
     message.style.fontSize = '1.2em';
     message.style.lineHeight = '1.6';
 
-    // --- Mensaje final mejorado ---
     let finalMessage = '';
     if (isVictory) {
         title.textContent = '¡Has Escapado!';
@@ -656,22 +568,20 @@ function endGame(isVictory) {
         finalMessage = `Lograste abrir la puerta y salir a la fría noche con ${String(minutesLeft).padStart(2, '0')}:${String(secondsLeft).padStart(2, '0')} restantes. Eres libre... por ahora.`;
         playSound(sfxUnlock);
     } else {
-        if (remainingTime <= 0) { // Derrota por tiempo
+        if (remainingTime <= 0) {
             title.textContent = '¡Tiempo Agotado!';
             finalMessage = 'Las manecillas marcaron el final. La oscuridad te consume y la mansión te reclama...';
-            playSound(sfxLocked); // Sonido de derrota por tiempo (ejemplo)
-        } else { // Otra derrota (si se implementara)
+            playSound(sfxLocked);
+        } else {
             title.textContent = 'Atrapado para Siempre';
             finalMessage = 'Cometiste un error fatal o te rendiste ante el horror. La mansión te reclama...';
-            playSound(sfxJumpScare1); // Sonido de derrota genérica
+            playSound(sfxJumpScare1);
         }
     }
     message.textContent = finalMessage;
-    // --- Fin del mensaje final mejorado ---
 
     const restartButton = document.createElement('button');
     restartButton.textContent = 'Jugar de Nuevo';
-    // Estilos del botón
     restartButton.style.padding = '12px 25px';
     restartButton.style.fontSize = '1.3em';
     restartButton.style.cursor = 'pointer';
@@ -684,22 +594,19 @@ function endGame(isVictory) {
     restartButton.onmouseover = () => { restartButton.style.backgroundColor = '#666'; restartButton.style.transform = 'scale(1.05)'; };
     restartButton.onmouseout = () => { restartButton.style.backgroundColor = '#444'; restartButton.style.transform = 'scale(1)'; };
     restartButton.onmousedown = () => { restartButton.style.transform = 'scale(0.98)'; };
-    restartButton.onmouseup = () => { restartButton.style.transform = 'scale(1.05)'; }; // Vuelve a tamaño hover
-
+    restartButton.onmouseup = () => { restartButton.style.transform = 'scale(1.05)'; };
     restartButton.onclick = () => {
-        document.body.removeChild(endScreen); // Quitar pantalla final
-        startScreen.style.display = 'block'; // Mostrar pantalla inicial
-        // --- Resetear visualización del timer ---
-        timerDisplay.textContent = "10:00"; // Tiempo inicial
+        document.body.removeChild(endScreen);
+        startScreen.style.display = 'block';
+        timerDisplay.textContent = "10:00";
         timerDisplay.classList.remove('low-time');
-        timerDisplay.style.color = '#ffc107'; // Color inicial
-        // --- ---
+        timerDisplay.style.color = '#ffc107';
     };
 
     endScreen.appendChild(title);
     endScreen.appendChild(message);
     endScreen.appendChild(restartButton);
-    document.body.appendChild(endScreen); // Añadir al body
+    document.body.appendChild(endScreen);
 }
 
 // --- Inicialización ---
