@@ -418,7 +418,9 @@ function renderInteractiveObjects() {
             area.style.width = obj.coords.width;
             area.style.height = obj.coords.height;
             area.dataset.objectId = obj.id;
-            area.title = obj.name;
+            // V V V ESTA ES LA LÍNEA QUE TIENES QUE QUITAR O COMENTAR V V V
+            // area.title = obj.name; // Tooltip con el nombre
+            // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
             area.addEventListener('click', () => handleInteraction(obj.id));
             roomElement.appendChild(area);
         });
