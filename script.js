@@ -127,15 +127,12 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-
             // --- DENTRO del array 'objects' de la sala 'pasillo' ---
-
             // ... (otros objetos como puerta_biblioteca, cuadro_antiguo, etc.) ...
-
             // ***** NUEVO OBJETO: ENTRADA AL VESTÍBULO *****
             {
                 id: 'puerta_vestibulo', // Identificador único
-                name: 'Arco al Vestíbulo Principal', // Nombre descriptivo (o 'Puerta al Vestíbulo')
+                name: 'Puerta al Vestíbulo Principal', // Nombre descriptivo (o 'Puerta al Vestíbulo')
                 // !!! COORDENADAS DE EJEMPLO - ¡¡DEBES AJUSTARLAS!! !!!
                 // Busca un lugar adecuado en tu imagen del pasillo (room2.jpg)
                 // que parezca una entrada a otra área importante.
@@ -145,18 +142,13 @@ const rooms = {
                     // al principio (ej: necesitar una llave específica encontrada en otro lugar),
                     // pero por ahora, hacemos que siempre funcione para poder avanzar.
 
-                    setMessage("Atraviesas un arco imponente hacia lo que parece ser el vestíbulo principal de la mansión.");
+                    setMessage("Atraviesas la puerta hacia lo que parece ser el vestíbulo principal de la mansión.");
                     playSound(sfxDoorCreak); // Puedes usar el chirrido normal o buscar un sonido más 'grande'
                     changeRoom('vestibulo'); // Cambia a la sala final
                 }
             },
             // ***** FIN DEL NUEVO OBJETO *****
-
-
             // ... (el objeto 'volver_sotano' y otros que tengas) ...
-
-
-            
             // --- Objeto 'puerta_dormitorio' DENTRO de la sala 'pasillo' ---
             {
                 id: 'puerta_dormitorio',
