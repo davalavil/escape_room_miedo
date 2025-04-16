@@ -133,7 +133,7 @@ const rooms = {
                      playSound(sfxLocked);
                 }
              },
-             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '55%', left: '10%', width: '10%', height: '20%' }, // Asumiendo que está a la izquierda
+             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '55%', left: '10%', width: '2%', height: '20%' }, // Asumiendo que está a la izquierda
                 action: (state) => {
                     playSound(sfxDoorCreak);
                     changeRoom('sotano');
