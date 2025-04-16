@@ -97,7 +97,7 @@ body {
     border: none; /* Sin borde */
     /* --- FIN DE LÍNEAS PARA INVISIBILIDAD --- */
 
-    /* Para depuración (descomenta para ver las cajas): */
+    /* Para depuración (comentado): */
     /* background-color: rgba(255, 255, 0, 0.2); */
     /* border: 1px dashed yellow; */
 
@@ -105,15 +105,9 @@ body {
     /* top: 10%; left: 20%; width: 15%; height: 20%; */
 }
 
-/* Efecto al Pasar el Ratón por Área Interactiva (Opcional) */
+/* Efecto al Pasar el Ratón por Área Interactiva (VACÍO PARA NINGÚN EFECTO) */
 .interactive-area:hover {
-     /* Puedes añadir un efecto sutil aquí si quieres, como un borde tenue */
-     /* Ejemplo: */
-     /* border: 1px solid rgba(255, 255, 255, 0.3); */
-
-     /* Para depuración (descomenta para ver las cajas al pasar el ratón): */
-     /* background-color: rgba(255, 255, 0, 0.4); */
-     /* border: 1px solid red; */
+    /* Intencionalmente vacío para que no haya ningún cambio visual al pasar el ratón */
 }
 
 /* Contenedor de la Interfaz de Usuario (Mensajes, Timer, Inventario) */
