@@ -74,10 +74,13 @@ const rooms = {
              { id: 'tuberia_sotano', name: 'Tubería que gotea', coords: { top: '18%', left: '0%', width: '10%', height: '10%' },
                  action: (state) => {
                      setMessage('Una tubería vieja y oxidada gotea sin cesar. El sonido es inquietante.');
-                     if (!state.flags.sotano_tuberia_susto && Math.random() < 0.3) {
-                        triggerJumpScare('images/scare1.png', sfxJumpScare1, 700);
-                        playSound(sfxWhisper);
-                        state.flags.sotano_tuberia_susto = true;
+                     // ¡Susto potencial!
+                     // V PROBABILIDAD CAMBIADA A 70% V
+                     if (!state.flags.sotano_tuberia_susto && Math.random() < 0.7) { // 70% de probabilidad
+                        // V DURACIÓN CAMBIADA A 2000 ms (2 segundos) V
+                        triggerJumpScare('images/scare1.png', sfxJumpScare1, 2000); // Imagen, sonido, duración 2000 ms
+                        playSound(sfxWhisper); // Un susurro después
+                        state.flags.sotano_tuberia_susto = true; // Solo una vez
                      }
                  }
              }
