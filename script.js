@@ -90,7 +90,7 @@ const rooms = {
         message: 'Un pasillo largo y decrépito. Hay varias puertas y un viejo cuadro en la pared. El aire es pesado.',
         backgroundMusic: bgmSuspense,
         objects: [
-            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '25%', left: '15%', width: '15%', height: '50%' },
+            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '25%', left: '45%', width: '15%', height: '50%' },
                 action: (state) => {
                     if (state.flags.pasillo_codigo_resuelto) {
                         playSound(sfxDoorCreak);
