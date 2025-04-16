@@ -161,7 +161,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'escritorio_biblio', name: 'Escritorio', coords: { top: '60%', left: '70%', width: '25%', height: '30%' },
+            { id: 'escritorio_biblio', name: 'Escritorio', coords: { top: '60%', left: '50%', width: '15%', height: '20%' },
                  action: (state) => {
                      if (!state.flags.biblioteca_nota_leida) {
                          setMessage('Sobre el escritorio hay una nota: "El guardián final requiere el metal del tiempo y el oro del saber..."');
@@ -172,7 +172,7 @@ const rooms = {
                      }
                  }
             },
-             { id: 'puerta_pasillo_biblio', name: 'Puerta al Pasillo', coords: { top: '30%', left: '85%', width: '10%', height: '40%' },
+             { id: 'puerta_pasillo_biblio', name: 'Puerta al Pasillo', coords: { top: '30%', left: '85%', width: '2%', height: '6%' },
                 action: (state) => {
                     playSound(sfxDoorCreak);
                     changeRoom('pasillo');
