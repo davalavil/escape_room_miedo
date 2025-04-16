@@ -489,40 +489,43 @@ function addItem(itemId, itemIcon = 'images/item_default.png') {
 }
 
 /**
- * Elimina un ítem del inventario.
+ * Añade un ítem al inventario.
  * @param {string} itemId - ID del ítem.
+ * @param {string} [itemIcon='images/item_default.png'] - Icono del ítem (ya no se pasa a updateInventory).
  */
-function removeItem(itemId) {
-     const index = inventory.indexOf(itemId);
-     if (index > -1) {
-         inventory.splice(index, 1);
-         updateInventory();
-          setActionMessage(`Has usado: ${itemId.replace(/_/g, ' ')}`);
-          console.log("Inventario actual:", inventory);
-     }
+function addItem(itemId, itemIcon = 'images/item_default.png') { // Mantenemos el parámetro por si acaso, pero no lo usamos abajo
+    if (!inventory.includes(itemId)) {
+        inventory.push(itemId);
+        // updateInventory(itemIcon); // <--- LÍNEA ANTERIOR COMENTADA/ELIMINADA
+        updateInventory();         // <--- NUEVA LLAMADA (sin parámetro de icono)
+        setActionMessage(`Has recogido: ${itemId.replace(/_/g, ' ')}`);
+        playSound(sfxItemPickup);
+        console.log("Inventario actual:", inventory);
+    } else {
+         setActionMessage(`Ya tienes ${itemId.replace(/_/g, ' ')}.`);
+    }
 }
+
 
 /**
  * Actualiza la lista de inventario en la UI.
- * @param {string | null} [iconForLastItem=null] - Icono para el último ítem añadido.
+ * ¡YA NO ACEPTA el parámetro iconForLastItem!
  */
-// function updateInventory(iconForLastItem = null) { // <--- COMENTA O ELIMINA ESTA LÍNEA
-function updateInventory() {                      // <--- USA ESTA LÍNEA (Sin parámetro)
+function updateInventory() {  // <--- FIRMA DE LA FUNCIÓN MODIFICADA
     inventoryList.innerHTML = ''; // Limpiar lista
-    inventory.forEach((item) => { // Ya no necesitamos 'index' para esta lógica
+    inventory.forEach((item) => { // Ya no necesitamos 'index' aquí
         const li = document.createElement('li');
         const img = document.createElement('img');
 
         // --- SIEMPRE CONSTRUYE LA RUTA DESDE EL ID DEL ITEM ---
-        img.src = `images/${item}.png`;
+        img.src = `images/${item}.png`; // Construye la ruta consistentemente
         // --- FIN DE LA LÍNEA MODIFICADA ---
 
         img.alt = item;
-        // Fallback si la imagen específica no carga
+        // Fallback si la imagen específica no carga (con log mejorado)
         img.onerror = () => {
-             // Añadimos un log más detallado para depuración
-             console.warn(`Icono no encontrado o error al cargar: images/${item}.png. Usando default.`);
-             img.src = 'images/item_default.png';
+             console.warn(`Icono no encontrado o error al cargar: 'images/${item}.png'. Usando default.`);
+             img.src = 'images/item_default.png'; // Usa un icono genérico si falla
         };
         li.appendChild(img);
         li.appendChild(document.createTextNode(item.replace(/_/g, ' '))); // Nombre legible
