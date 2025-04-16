@@ -38,7 +38,7 @@ const rooms = {
         message: 'Estás en un sótano húmedo y oscuro. Huele a tierra mojada y... a algo más. Hay una puerta de madera al fondo.',
         backgroundMusic: bgmCreepy,
         objects: [
-            { id: 'puerta_madera_sotano', name: 'Puerta de madera', coords: { top: '30%', left: '37%', width: '10%', height: '45%' },
+            { id: 'puerta_madera_sotano', name: 'Puerta de madera', coords: { top: '30%', left: '37%', width: '12%', height: '40%' },
                 action: (state) => {
                     if (state.flags.sotano_puerta_abierta) {
                         playSound(sfxDoorCreak);
@@ -66,7 +66,7 @@ const rooms = {
                     }
                 }
             },
-             { id: 'tuberia_sotano', name: 'Tubería que gotea', coords: { top: '18%', left: '20%', width: '10%', height: '10%' },
+             { id: 'tuberia_sotano', name: 'Tubería que gotea', coords: { top: '23%', left: '20%', width: '10%', height: '10%' },
                  action: (state) => {
                      setMessage('Una tubería vieja y oxidada gotea sin cesar. El sonido es inquietante.');
                      // ¡Susto potencial!
