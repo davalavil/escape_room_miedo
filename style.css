@@ -69,6 +69,10 @@ body {
     border: 3px solid #444; /* Borde mÃ¡s grueso */
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.8); /* Sombra mÃ¡s pronunciada */
     border-radius: 5px; /* Bordes ligeramente redondeados */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Standard syntax */
 }
 
 /* Ãrea de la Imagen de la Sala */
@@ -78,6 +82,10 @@ body {
     max-width: 800px; /* Ajusta segÃºn el ancho de tus imÃ¡genes */
     margin: 0 auto; /* Centrar imagen si es mÃ¡s estrecha que el max-width */
     line-height: 0; /* Evita espacio extra debajo de la imagen */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
 }
 
 #room-image {
@@ -85,6 +93,10 @@ body {
     width: 100%;
     height: auto; /* Mantiene la proporciÃ³n */
     border-bottom: 3px solid #444; /* Separa visualmente de la UI */
+    -webkit-user-select: none; /* Evita seleccionar la imagen misma */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
 }
 
 /* Ãreas Interactivas (Ahora Invisibles por Defecto) */
@@ -96,18 +108,19 @@ body {
     /* Cámbiala a 'default' o 'auto', o simplemente elimínala/coméntala */
     cursor: default; /* Mantiene el cursor normal (flecha) */
     /* O podrías usar: cursor: auto; */
-    
     /* --- ESTAS LÃNEAS HACEN EL ÃREA INVISIBLE --- */
     background-color: transparent; /* Sin color de fondo */
     border: none; /* Sin borde */
     /* --- FIN DE LÃNEAS PARA INVISIBILIDAD --- */
-
     /* Para depuraciÃ³n (descomenta para ver las cajas): */
     /* background-color: rgba(255, 255, 0, 0.2); */
     /* border: 1px dashed yellow; */
-
     /* El tamaÃ±o y posiciÃ³n se definen en JS para cada objeto */
     /* top: 10%; left: 20%; width: 15%; height: 20%; */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
 }
 
 /* Efecto al Pasar el RatÃ³n por Ãrea Interactiva (Opcional) */
