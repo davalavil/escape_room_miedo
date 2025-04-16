@@ -133,7 +133,7 @@ const rooms = {
                      playSound(sfxLocked);
                 }
              },
-             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '62%', left: '17%', width: '2%', height: '6%' }, // Asumiendo que está a la izquierda
+             { id: 'volver_sotano', name: 'Puerta al Sótano', coords: { top: '62%', left: '16%', width: '2%', height: '6%' }, // Asumiendo que está a la izquierda
                 action: (state) => {
                     playSound(sfxDoorCreak);
                     changeRoom('sotano');
@@ -161,7 +161,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'escritorio_biblio', name: 'Escritorio', coords: { top: '60%', left: '40%', width: '7%', height: '10%' },
+            { id: 'escritorio_biblio', name: 'Escritorio', coords: { top: '63%', left: '38%', width: '7%', height: '3%' },
                  action: (state) => {
                      if (!state.flags.biblioteca_nota_leida) {
                          setMessage('Sobre el escritorio hay una nota: "El guardián final requiere el metal del tiempo y el oro del saber..."');
@@ -172,7 +172,7 @@ const rooms = {
                      }
                  }
             },
-             { id: 'puerta_pasillo_biblio', name: 'Puerta al Pasillo', coords: { top: '55%', left: '80%', width: '2%', height: '6%' },
+             { id: 'puerta_pasillo_biblio', name: 'Puerta al Pasillo', coords: { top: '55%', left: '81%', width: '2%', height: '6%' },
                 action: (state) => {
                     playSound(sfxDoorCreak);
                     changeRoom('pasillo');
