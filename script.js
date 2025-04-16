@@ -256,7 +256,7 @@ const rooms = {
                     }
                  }
             },
-            { id: 'cama_dosel', name: 'Cama con dosel', coords: { top: '30%', left: '50%', width: '40%', height: '50%' },
+            { id: 'cama_dosel', name: 'Cama con dosel', coords: { top: '83%', left: '39%', width: '2%', height: '6%' },
                  action: (state) => {
                      if (!state.inventory.includes('palanca_metalica')) {
                          setMessage('Buscas bajo la cama polvorienta y encuentras una palanca metálica fría al tacto.');
