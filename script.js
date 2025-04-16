@@ -285,41 +285,60 @@ const rooms = {
             dormitorio_puerta_abierta: false,
         }
     },
+
+    
     // --- SALA 5: VESTÍBULO FINAL ---
     vestibulo: {
         image: 'images/room5.jpeg',
         message: 'El vestíbulo principal. La gran puerta de salida está frente a ti, pero tiene una cerradura compleja.',
-        backgroundMusic: bgmSuspense,
+        backgroundMusic: bgmSuspense, // Música más intensa
         objects: [
             { id: 'puerta_salida', name: 'Puerta de Salida', coords: { top: '47%', left: '51%', width: '1%', height: '4%' },
                 action: (state) => {
-                    // *** DIARIO: Mensaje modificado para referenciar el diario/pista ***
-                    if (state.inventory.includes('crowbar') && state.inventory.includes('gear')) {
+                    // *** NUEVA COMPROBACIÓN DIARIO: Añadimos la condición de que el diario esté abierto ***
+                    // Necesitamos acceder a las flags de OTRA sala (biblioteca)
+                    const diarioAbierto = rooms.biblioteca.flags.biblioteca_diario_abierto;
+
+                    // Condición de Victoria: ¿Tiene ambos objetos Y el diario está abierto?
+                    if (state.inventory.includes('crowbar') && state.inventory.includes('gear') && diarioAbierto) {
                         setMessage('Recordando la pista del diario sobre "el metal del tiempo y el oro del saber", colocas el engranaje dorado en una ranura y usas la palanca metálica en un mecanismo. La cerradura hace un ruido sordo y ¡LA PUERTA SE ABRE! Has escapado... ¿o no?');
                         playSound(sfxUnlock);
                         endGame(true); // Victoria
+
+                    // *** NUEVA COMPROBACIÓN DIARIO: ¿Tiene ambos objetos PERO el diario NO está abierto? ***
+                    } else if (state.inventory.includes('crowbar') && state.inventory.includes('gear') && !diarioAbierto) {
+                         setMessage('Tienes la palanca y el engranaje correctos, pero el mecanismo no responde del todo... Quizás necesites entender *cómo* usarlos. ¿Qué decía exactamente el diario?');
+                         playSound(sfxLocked); // Suena bloqueado porque falta el "saber"
+
+                    // ¿Tiene la palanca pero le falta el engranaje? (El estado del diario es irrelevante aquí)
                     } else if (state.inventory.includes('crowbar')) {
                         setMessage('Hay una ranura que parece necesitar algún tipo de engranaje dorado... El diario mencionaba "oro del saber".');
                         playSound(sfxLocked);
+
+                    // ¿Tiene el engranaje pero le falta la palanca? (El estado del diario es irrelevante aquí)
                     } else if (state.inventory.includes('gear')) {
                          setMessage('Hay un mecanismo que parece necesitar una palanca resistente para activarlo... El diario mencionaba "metal del tiempo".');
                          playSound(sfxLocked);
+
+                    // No tiene (al menos) uno de los objetos necesarios
                     } else {
-                        // *** DIARIO: Mensaje modificado ***
-                        setMessage('La cerradura es compleja. El viejo diario que encontraste tenía una pista sobre "el metal del tiempo y el oro del saber", pero necesitas encontrar esos objetos.');
+                        setMessage('La cerradura es compleja. El viejo diario que encontraste tenía una pista sobre "el metal del tiempo y el oro del saber", pero necesitas encontrar ambos objetos.');
                         playSound(sfxLocked);
                     }
                 }
             },
             { id: 'volver_pasillo_vestibulo', name: 'Volver al Pasillo', coords: { top: '56%', left: '11%', width: '2%', height: '6%' },
-                action: (state) => { /* ... (sin cambios aquí) ... */
+                action: (state) => {
                      playSound(sfxDoorCreak);
                      changeRoom('pasillo');
                 }
             }
+            // Podrías añadir más elementos decorativos o sustos aquí
         ],
         flags: {}
     },
+
+    
 };
 
 // --- IMPORTANTE: Copia profunda inicial para resetear flags ---
