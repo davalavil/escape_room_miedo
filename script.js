@@ -90,7 +90,7 @@ const rooms = {
         message: 'Un pasillo largo y decrépito. Hay varias puertas y un viejo cuadro en la pared. El aire es pesado.',
         backgroundMusic: bgmSuspense,
         objects: [
-            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '55%', left: '67%', width: '2%', height: '8%' },
+            { id: 'puerta_biblioteca', name: 'Puerta a la Biblioteca', coords: { top: '55%', left: '69%', width: '2%', height: '8%' },
                 action: (state) => {
                     if (state.flags.pasillo_codigo_resuelto) {
                         playSound(sfxDoorCreak);
@@ -127,7 +127,7 @@ const rooms = {
                       // Pista para el código: 482
                 }
             },
-            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '25%', left: '80%', width: '15%', height: '20%' },
+            { id: 'puerta_dormitorio', name: 'Puerta al Dormitorio', coords: { top: '55%', left: '80%', width: '5%', height: '8%' },
                 action: (state) => {
                      setMessage('Esta puerta parece atascada o bloqueada desde el otro lado.');
                      playSound(sfxLocked);
