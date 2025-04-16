@@ -268,7 +268,7 @@ const rooms = {
                  }
             },
             // Añadir puerta para volver (quizás al pasillo)
-             { id: 'puerta_pasillo_dorm', name: 'Puerta al Pasillo', coords: { top: '25%', left: '5%', width: '15%', height: '50%' },
+             { id: 'puerta_pasillo_dorm', name: 'Puerta al Pasillo', coords: { top: '55%', left: '81%', width: '2%', height: '3%' },
                 action: (state) => {
                     // Esta puerta podría necesitar la palanca para abrirse desde este lado
                     if (!state.flags.dormitorio_puerta_abierta && state.inventory.includes('palanca_metalica')) {
