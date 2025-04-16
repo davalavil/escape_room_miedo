@@ -328,7 +328,7 @@ const rooms = {
                     }
                 }
             },
-            { id: 'volver_pasillo_vestibulo', name: 'Volver al Pasillo', coords: { top: '80%', left: '45%', width: '2%', height: '6%' }, // Puerta atrás
+            { id: 'volver_pasillo_vestibulo', name: 'Volver al Pasillo', coords: { top: '56%', left: '11%', width: '2%', height: '6%' }, // Puerta atrás
                 action: (state) => {
                      // Decidir cómo se entra aquí, ¿quizás una puerta específica del pasillo?
                      // Por ahora, asumimos que se puede volver.
