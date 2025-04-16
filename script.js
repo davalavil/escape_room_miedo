@@ -410,8 +410,8 @@ function checkUselessClick() {
     console.log(`Clic inútil número: ${uselessClickCounter}`);
     if (uselessClickCounter > USELESS_CLICK_LIMIT) {
         console.log("¡Susto por clics inútiles!");
-        // Usamos duración corta (700ms) para este susto, diferente al de la tubería
-        triggerJumpScare('images/scare1.png', sfxJumpScare1, 700);
+        // Usamos duración corta (1400ms) para este susto, diferente al de la tubería
+        triggerJumpScare('images/scare1.png', sfxJumpScare1, 1400);
         uselessClickCounter = 0; // Resetea después del susto
     }
 }
