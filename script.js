@@ -308,7 +308,7 @@ const rooms = {
         message: 'El vestíbulo principal. La gran puerta de salida está frente a ti, pero tiene una cerradura compleja.',
         backgroundMusic: bgmSuspense, // Música más intensa
         objects: [
-            { id: 'puerta_salida', name: 'Puerta de Salida', coords: { top: '10%', left: '35%', width: '2%', height: '6%' },
+            { id: 'puerta_salida', name: 'Puerta de Salida', coords: { top: '47%', left: '51%', width: '1%', height: '4%' },
                 action: (state) => {
                     // Puzzle final: necesita la palanca y el engranaje? (según la nota de la biblio)
                     if (state.inventory.includes('palanca_metalica') && state.inventory.includes('engranaje_dorado')) {
