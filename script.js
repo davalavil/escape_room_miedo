@@ -150,7 +150,7 @@ const rooms = {
         message: 'Una biblioteca llena de libros polvorientos. El silencio es casi total, roto solo por el crujir de la madera vieja.',
         backgroundMusic: bgmCreepy, // Podría tener su propia música más tranquila/inquietante
         objects: [
-            { id: 'estanteria_libros', name: 'Estantería', coords: { top: '10%', left: '10%', width: '60%', height: '80%' },
+            { id: 'estanteria_libros', name: 'Estantería', coords: { top: '10%', left: '1%', width: '30%', height: '30%' },
                 action: (state) => {
                     if (!state.inventory.includes('engranaje_dorado')) {
                         setMessage('Miles de libros. Uno parece fuera de lugar... ¡Ajá! Detrás de un tomo falso, encuentras un pequeño engranaje dorado.');
