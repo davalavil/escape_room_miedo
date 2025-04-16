@@ -38,7 +38,7 @@ const rooms = {
         message: 'Estás en un sótano húmedo y oscuro. Huele a tierra mojada y... a algo más. Hay una puerta de madera al fondo.',
         backgroundMusic: bgmCreepy,
         objects: [
-            { id: 'puerta_madera_sotano', name: 'Puerta de madera', coords: { top: '30%', left: '45%', width: '12%', height: '40%' },
+            { id: 'puerta_madera_sotano', name: 'Puerta de madera', coords: { top: '30%', left: '40%', width: '12%', height: '37%' },
                 action: (state) => {
                     if (state.flags.sotano_puerta_abierta) {
                         playSound(sfxDoorCreak);
